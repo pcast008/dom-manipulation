@@ -59,7 +59,7 @@ function sortData(direction) {
 // Your code goes here...
 Array.from(sortBtn).forEach(btn => {
     btn.addEventListener("click", () => {
-        sortData(btn.dataset.sortdir)
+        sortData(btn.dataset.sortdir);
     })
 })
 
