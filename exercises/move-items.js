@@ -49,8 +49,17 @@ favs.inner
 // Your code goes here
 function updateCollections(id, direction) {
     const item = document.getElementById(id);
+    const icon = item.querySelector("i");
     item.remove();
-    direction === "toFavs" ? favs.appendChild(item) : main.appendChild(item);
+    if (direction === "toFavs") {
+        icon.classList.remove("fa-heart-circle-plus");
+        icon.classList.add("fa-heart-crack");
+        favs.appendChild(item);
+    } else {
+        icon.classList.remove("fa-heart-crack");
+        icon.classList.add("fa-heart-circle-plus");
+        main.appendChild(item);
+    }
 }
 
 
