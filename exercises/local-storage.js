@@ -38,3 +38,44 @@
  */
 
 // Your code goes here...
+const container = document.querySelector(".cardsContainer");
+const cards = document.getElementsByClassName("card");
+localStorage.setItem("favorites", "1,2,3,4,5");
+let favorites = localStorage.getItem("favorites");
+
+function setToRed() {
+    Array.from(cards).forEach(card => {
+        if (favorites.split(",").includes(card.id)) {
+            card.classList.add("red")
+        }
+    })
+}
+
+setToRed();
+
+function addToFavs(id) {
+    let favs = localStorage.getItem("favorites");
+    favs += `,${id}`;
+    localStorage.setItem("favorites", favs);
+}
+
+function deleteFromFavs(id) {
+    const favs = localStorage.getItem("favorites");
+    const favoritesArr = favs.split(",");
+    favoritesArr.splice(favoritesArr.indexOf(id), 1).join(",");
+    localStorage.setItem("favorites", favoritesArr);
+}
+
+function callBack(e) {
+    const card = e.target;
+
+    if (card.classList.contains("red")) {
+        deleteFromFavs(card.id);
+        card.classList.remove("red");
+    } else {
+        addToFavs(card.id);
+        card.classList.add("red");
+    }
+}
+
+container.addEventListener("click", callBack);
