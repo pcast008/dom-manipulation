@@ -41,7 +41,7 @@
 const container = document.querySelector(".cardsContainer");
 const cards = document.getElementsByClassName("card");
 localStorage.setItem("favorites", "1,2,3,4,5");
-let favorites = localStorage.getItem("favorites");
+const favorites = localStorage.getItem("favorites");
 
 function setToRed() {
     Array.from(cards).forEach(card => {
