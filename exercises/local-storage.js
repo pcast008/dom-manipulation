@@ -40,7 +40,7 @@
 // Your code goes here...
 const container = document.querySelector(".cardsContainer");
 const cards = document.getElementsByClassName("card");
-localStorage.setItem("favorites", "1,2,3,4,5");
+localStorage.setItem("favorites", "");
 const favorites = localStorage.getItem("favorites");
 
 function setToRed() {
@@ -55,7 +55,13 @@ setToRed();
 
 function addToFavs(id) {
     let favs = localStorage.getItem("favorites");
-    favs += `,${id}`;
+    
+    if (favs === "") {
+        favs += `${id}`;
+    } else {
+        favs += `,${id}`;
+    }
+    
     localStorage.setItem("favorites", favs);
 }
 
@@ -67,7 +73,7 @@ function deleteFromFavs(id) {
 }
 
 function callBack(e) {
-    const card = e.target;
+    const card = e;
 
     if (card.classList.contains("red")) {
         deleteFromFavs(card.id);
@@ -78,4 +84,8 @@ function callBack(e) {
     }
 }
 
-container.addEventListener("click", callBack);
+container.addEventListener("click", e => {
+    if (e.target.classList.contains("card")) {
+        callBack(e.target);
+    }
+});
